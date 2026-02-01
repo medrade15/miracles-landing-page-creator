@@ -97,4 +97,4 @@ videos: [
 
 ---
 
-**ID do YouTube:** no link `https://www.youtube.com/watch?v=Dp8-wKmx8wY` o ID é **Dp8-wKmx8wY** (a parte depois de `v=`).
+**ID do YouTube:** no link `https://www.youtube.com/watch?v=Dp8-wKmx8wY` o ID é **Dp8-wKmx8wY** (a parte depois de `v=`)...
