@@ -41,9 +41,10 @@ import { jwtDecode } from "jwt-decode";
  *   description, year, duration, rating, match → textos (qualquer valor)
  */
 
-// ID do Cliente Google para Login
+// ID do Cliente Google para Login (vem do .env.local com prefixo VITE_)
 const GOOGLE_CLIENT_ID =
-  "544638929164-bnuhjbpi6nf0951o76nbot790lca3avk.apps.googleusercontent.com";
+  import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+  "299107028485-rt15gad0gbrvo56pb98dosne69jffb4h.apps.googleusercontent.com";
 
 /** Imagem e vídeo do banner principal (topo da página) */
 const HERO_CONFIG = {
