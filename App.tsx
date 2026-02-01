@@ -81,7 +81,7 @@ const CATEGORIAS: { nome: string; videos: Movie[] }[] = [
       // Cada objeto abaixo = 1 vídeo. Para adicionar mais: copie o bloco inteiro { id, title, thumbnail, ... } e cole aqui (com vírgula).
       {
         id: "Dp8-wKmx8wY",  // ← ID do vídeo no YouTube (do link watch?v=XXXXX)
-        title: "O MILAGRE DA VIDA",
+        title: "A CRIAÇÃO",
         thumbnail: "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=800",  // ← CAPA do vídeo (URL da imagem)
         description:
           "Uma experiência cinematográfica sobre os milagres que nos cercam todos os dias.",
@@ -91,8 +91,8 @@ const CATEGORIAS: { nome: string; videos: Movie[] }[] = [
         rating: "L",
       },
       {
-        id: "kJQP7kiw5Fk",  // ID YouTube
-        title: "A Força da Oração",
+        id: "EBiuebsaU0c",  // ID YouTube
+        title: "ADÃO E EVA",
         thumbnail: "https://images.unsplash.com/photo-1447069387593-a5de0862481e?q=80&w=800",  // CAPA
         description:
           "Descubra como a fé move montanhas e transforma realidades impossíveis.",
@@ -188,15 +188,16 @@ const CATEGORIAS: { nome: string; videos: Movie[] }[] = [
 ];
 
 /**
- * PLAYER DE VÍDEO (REVISADO PARA FUNCIONAR INSTANTANEAMENTE)
+ * PLAYER DE VÍDEO — só dentro do sistema, sem abrir YouTube.
+ * Overlay cobre a logo do YouTube no canto para não aparecer nem ser clicável.
  */
 const NetflixPlayer: React.FC<{ videoId: string; onClose: () => void }> = ({
   videoId,
   onClose,
 }) => {
   const currentOrigin = window.location.origin;
-  // Parâmetros cruciais: autoplay=1 (toca sozinho), mute=0 (tenta com som), controls=1 (mostra botões)
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1&showinfo=0&enablejsapi=1&origin=${encodeURIComponent(currentOrigin)}`;
+  // modestbranding=1 reduz branding; rel=0 não sugere outros vídeos; sem link para abrir no YouTube
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1&showinfo=0&iv_load_policy=3&origin=${encodeURIComponent(currentOrigin)}`;
 
   return (
     <div className="fixed inset-0 z-[200] bg-black flex flex-col animate-profile overflow-hidden">
@@ -216,16 +217,21 @@ const NetflixPlayer: React.FC<{ videoId: string; onClose: () => void }> = ({
         />
       </div>
 
-      {/* Iframe configurado para autoplay */}
-      <div className="flex-1 w-full h-full bg-black">
+      {/* Vídeo só no sistema — bloqueador cobre toda a barra inferior para ninguém clicar e sair para o YouTube */}
+      <div className="flex-1 w-full h-full bg-black relative">
         <iframe
           key={videoId}
           className="w-full h-full border-0"
           src={embedUrl}
-          title="YouTube video player"
+          title="Player de vídeo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-        ></iframe>
+        />
+        {/* Bloqueador: barra inteira em baixo (logo + "Assistir no YouTube") — ninguém clica e sai para o YouTube */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-16 md:h-20 bg-black pointer-events-auto z-[205]"
+          aria-hidden
+        />
       </div>
     </div>
   );
@@ -267,21 +273,22 @@ const MovieRow: React.FC<{
           {movies.map((movie) => (
             <div
               key={movie.id}
+              onClick={() => onPlay(movie.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && onPlay(movie.id)}
               className="flex-none w-[280px] md:w-[360px] aspect-video rounded-md overflow-hidden cursor-pointer hover:scale-110 md:hover:scale-125 hover:z-50 transition-all duration-500 delay-75 relative group/card shadow-2xl bg-[#2a2a2a]"
             >
               <img
                 src={movie.thumbnail}
                 alt={movie.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover pointer-events-none"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex flex-col justify-end p-4 md:p-5">
-                <div className="flex gap-2 mb-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex flex-col justify-end p-4 md:p-5 pointer-events-none">
+                <div className="flex gap-2 mb-4 pointer-events-auto">
                   <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onPlay(movie.id);
-                    }}
                     className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center hover:bg-white/90 shadow-lg"
+                    aria-hidden
                   >
                     <Play size={18} fill="black" />
                   </div>
@@ -295,7 +302,7 @@ const MovieRow: React.FC<{
                     <ChevronDown size={18} />
                   </div>
                 </div>
-                <h3 className="text-white text-xs md:text-sm font-black truncate">
+                <h3 className="text-white text-xs md:text-sm font-black truncate pointer-events-none">
                   {movie.title}
                 </h3>
               </div>
@@ -329,19 +336,22 @@ const InfoModal: React.FC<{
         >
           <X size={24} />
         </button>
-        <div className="relative aspect-video">
-          <img src={movie.thumbnail} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
-          <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6">
+        <div
+          onClick={() => onPlay(movie.id)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && onPlay(movie.id)}
+          className="relative aspect-video cursor-pointer"
+        >
+          <img src={movie.thumbnail} className="w-full h-full object-cover pointer-events-none" alt="" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent pointer-events-none"></div>
+          <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 pointer-events-none">
             <h1 className="text-2xl md:text-5xl font-black mb-4 md:mb-6 uppercase tracking-tighter text-white drop-shadow-lg">
               {movie.title}
             </h1>
-            <button
-              onClick={() => onPlay(movie.id)}
-              className="bg-white text-black px-6 md:px-8 py-2 md:py-3 rounded-md font-black flex items-center gap-2 text-base md:text-xl hover:bg-white/80 active:scale-95 transition-all shadow-xl"
-            >
+            <span className="inline-flex items-center gap-2 bg-white text-black px-6 md:px-8 py-2 md:py-3 rounded-md font-black text-base md:text-xl">
               <Play fill="black" /> Assistir Agora
-            </button>
+            </span>
           </div>
         </div>
         <div className="p-6 md:p-10">
@@ -548,11 +558,17 @@ export default function App() {
           </header>
 
           {!searchQuery && (
-            <section className="relative h-[85vh] md:h-[100vh] w-full flex items-center px-6 md:px-12 overflow-hidden">
+            <section
+              onClick={() => setActiveVideoId(HERO_CONFIG.videoId)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveVideoId(HERO_CONFIG.videoId)}
+              className="relative h-[85vh] md:h-[100vh] w-full flex items-center px-6 md:px-12 overflow-hidden cursor-pointer"
+            >
               <div className="absolute inset-0 z-0 bg-black">
                 <img
                   src={HERO_CONFIG.coverImage}
-                  className="w-full h-full object-cover opacity-50 animate-pulse-slow"
+                  className="w-full h-full object-cover opacity-50 animate-pulse-slow pointer-events-none"
                   alt="Hero"
                 />
                 <div className="absolute inset-0 hero-gradient"></div>
@@ -574,13 +590,19 @@ export default function App() {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <button
-                    onClick={() => setActiveVideoId(HERO_CONFIG.videoId)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveVideoId(HERO_CONFIG.videoId);
+                    }}
                     className="bg-white text-black px-6 md:px-10 py-3 md:py-4 rounded font-black flex items-center gap-3 text-base md:text-xl shadow-2xl transition-all hover:bg-opacity-90 active:scale-95"
                   >
                     <Play fill="black" size={24} /> Assistir
                   </button>
                   <button
-                    onClick={() => setInfoMovie(heroMovie)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInfoMovie(heroMovie);
+                    }}
                     className="bg-gray-500/40 text-white px-6 md:px-10 py-3 md:py-4 rounded font-black flex items-center gap-3 text-base md:text-xl backdrop-blur-xl border border-white/20 hover:bg-gray-500/60 transition-all"
                   >
                     <Info size={24} /> Mais Info
