@@ -44,7 +44,7 @@ import { jwtDecode } from "jwt-decode";
 // ID do Cliente Google para Login (vem do .env.local com prefixo VITE_)
 const GOOGLE_CLIENT_ID =
   import.meta.env.VITE_GOOGLE_CLIENT_ID ||
-  "299107028485-rt15gad0gbrvo56pb98dosne69jffb4h.apps.googleusercontent.com";
+  "544638929164-bnuhjbpi6nf0951o76nbot790lca3avk.apps.googleusercontent.com";
 
 /** Pasta base das imagens (organizadas em public/images/) */
 const IMAGES_BASE = "/images";
