@@ -46,11 +46,126 @@ const GOOGLE_CLIENT_ID =
   import.meta.env.VITE_GOOGLE_CLIENT_ID ||
   "299107028485-rt15gad0gbrvo56pb98dosne69jffb4h.apps.googleusercontent.com";
 
+/** Pasta base das imagens (organizadas em public/images/) */
+const IMAGES_BASE = "/images";
+
+/** Caminhos das fotos de capa — coloque os arquivos nas pastas indicadas em public/images/ */
+const IMAGENS = {
+  hero: {
+    cover: `${IMAGES_BASE}/hero/cover.jpg`,
+    fallback:
+      "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=2000",
+  },
+  login: {
+    background: `${IMAGES_BASE}/login/background.jpg`,
+    fallback:
+      "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2000",
+  },
+  /** Thumbnail de cada vídeo = arquivo na pasta da categoria. Chave = nome do arquivo (ex: inicio-03.jpg). */
+  categorias: {
+    "ÍNICIO": {
+      "a-criacao.jpg": "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=800",
+      "adao-e-eva.jpg": "https://images.unsplash.com/photo-1447069387593-a5de0862481e?q=80&w=800",
+      "inicio-03.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-04.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-05.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-06.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-07.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-08.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-09.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-10.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-11.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "inicio-12.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+    },
+    "em-alta": {
+      "a-criacao.jpg": "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=800",
+      "adao-e-eva.jpg": "https://images.unsplash.com/photo-1447069387593-a5de0862481e?q=80&w=800",
+    },
+    "series-epicas": {
+      "caminhos-de-luz.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-02.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-03.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-04.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-05.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-06.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-07.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-08.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-09.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-10.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+      "series-11.jpg": "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
+    },
+    documentarios: {
+      "exemplo-documentario.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-02.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-03.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-04.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-05.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-06.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-07.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-08.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-09.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-10.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+      "documentario-11.jpg": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
+    },
+    filmes: {
+      "filme-destaque.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-02.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-03.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-04.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-05.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-06.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-07.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-08.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-09.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-10.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+      "filme-11.jpg": "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
+    },
+    testemunhos: {
+      "testemunho-fe.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-02.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-03.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-04.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-05.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-06.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-07.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-08.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-09.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-10.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+      "testemunho-11.jpg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+    },
+    "musica-louvor": {
+      "louvor-ao-vivo.jpg":
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800",
+    },
+  },
+} as const;
+
+/** Retorna URL da thumbnail: pasta da categoria + arquivo. Fallback se a imagem local não carregar. */
+function getThumbnailUrl(
+  categorySlug: keyof typeof IMAGENS.categorias,
+  filename: string
+): string {
+  return `${IMAGES_BASE}/categorias/${categorySlug}/${filename}`;
+}
+function getThumbnailFallback(
+  categorySlug: keyof typeof IMAGENS.categorias,
+  filename: string
+): string | undefined {
+  const cat = IMAGENS.categorias[categorySlug] as Record<string, string> | undefined;
+  return cat?.[filename];
+}
+
+/** Retorna o slug da categoria que contém o vídeo com esse id. */
+function getCategorySlugForMovie(videoId: string): keyof typeof IMAGENS.categorias {
+  const cat = CATEGORIAS.find((c) => c.videos.some((v) => v.id === videoId));
+  return cat?.slug ?? "em-alta";
+}
+
 /** Imagem e vídeo do banner principal (topo da página) */
 const HERO_CONFIG = {
   videoId: "Dp8-wKmx8wY",
-  coverImage:
-    "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=2000",
+  coverImage: IMAGENS.hero.cover,
+  coverImageFallback: IMAGENS.hero.fallback,
   title: "O MILAGRE DA VIDA",
   description:
     "Uma experiência cinematográfica sobre os milagres que nos cercam todos os dias. Assista agora ao conteúdo original.",
@@ -73,117 +188,120 @@ interface UserProfile {
   photoURL: string;
 }
 
-// ---------- 6 CATEGORIAS (cada uma = uma fila/carrossel) ----------
-// NOME DA CATEGORIA: mude a string em "nome". MAIS VÍDEOS: copie um bloco { id, title, thumbnail, ... } e cole em videos: [ ... ]
-const CATEGORIAS: { nome: string; videos: Movie[] }[] = [
+/** Cria um vídeo placeholder para você configurar: troque id (YouTube), title, thumbnail (arquivo na pasta da categoria), description, etc. */
+function video(
+  id: string,
+  title: string,
+  thumbnail: string,
+  description: string,
+  extra: { match?: number; year?: string; duration?: string; rating?: string } = {}
+): Movie {
+  return {
+    id,
+    title,
+    thumbnail,
+    description,
+    match: extra.match ?? 90,
+    year: extra.year ?? "2024",
+    duration: extra.duration ?? "—",
+    rating: extra.rating ?? "L",
+  };
+}
+
+// ---------- CATEGORIAS (cada uma = uma fila/carrossel) ----------
+// slug = pasta em public/images/categorias/{slug}/ — coloque as fotos de capa com o nome indicado em thumbnail
+const CATEGORIAS: { nome: string; slug: keyof typeof IMAGENS.categorias; videos: Movie[] }[] = [
   {
-    nome: "Em Alta",  // ← NOME DA CATEGORIA (legenda da fila)
+    nome: "ÍNICIO",
+    slug: "ÍNICIO",
     videos: [
-      // Cada objeto abaixo = 1 vídeo. Para adicionar mais: copie o bloco inteiro { id, title, thumbnail, ... } e cole aqui (com vírgula).
-      {
-        id: "Dp8-wKmx8wY",  // ← ID do vídeo no YouTube (do link watch?v=XXXXX)
-        title: "A CRIAÇÃO",
-        thumbnail: "https://images.unsplash.com/photo-1508197149814-0cc02e8b7f74?q=80&w=800",  // ← CAPA do vídeo (URL da imagem)
-        description:
-          "Uma experiência cinematográfica sobre os milagres que nos cercam todos os dias.",
-        match: 99,
-        year: "2024",
-        duration: "1h 45min",
-        rating: "L",
-      },
-      {
-        id: "EBiuebsaU0c",  // ID YouTube
-        title: "ADÃO E EVA",
-        thumbnail: "https://images.unsplash.com/photo-1447069387593-a5de0862481e?q=80&w=800",  // CAPA
-        description:
-          "Descubra como a fé move montanhas e transforma realidades impossíveis.",
-        match: 95,
-        year: "2023",
-        duration: "10 Episódios",
-        rating: "12",
-      },
+      video("Dp8-wKmx8wY", "A CRIAÇÃO", "a-criacao.jpg", "Uma experiência cinematográfica sobre os milagres que nos cercam todos os dias.", { match: 99, duration: "1h 45min" }),
+      video("EBiuebsaU0c", "ADÃO E EVA", "adao-e-eva.jpg", "Descubra como a fé move montanhas e transforma realidades impossíveis.", { match: 95, year: "2023", duration: "10 Episódios", rating: "12" }),
+      video("MwkakCTN8OA", "A ARCA", "arca.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-03.jpg"),
+      video("Meb3uBlf6vE", "TORRE DE BABEL", "torre-de-babel.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-04.jpg"),
+      video("jl8xXVGPgTs", "moises", "moises.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-05.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 6 — configure", "inicio-06.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-06.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 7 — configure", "inicio-07.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-07.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 8 — configure", "inicio-08.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-08.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 9 — configure", "inicio-09.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-09.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 10 — configure", "inicio-10.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-10.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 11 — configure", "inicio-11.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-11.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Vídeo 12 — configure", "inicio-12.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/ÍNICIO/inicio-12.jpg"),
     ],
   },
   {
-    nome: "Séries Épicas",  // ← NOME DA CATEGORIA
+    nome: "Séries Épicas",
+    slug: "series-epicas",
     videos: [
-      {
-        id: "ScMzIvxBSi4",
-        title: "Caminhos de Luz",
-        thumbnail:
-          "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=800",
-        description: "Relatos reais de superação e encontro com o sagrado.",
-        match: 92,
-        year: "2024",
-        duration: "1h 10min",
-        rating: "L",
-      },
+      video("ScMzIvxBSi4", "Caminhos de Luz", "caminhos-de-luz.jpg", "Relatos reais de superação e encontro com o sagrado.", { match: 92, duration: "1h 10min" }),
+      video("COLOQUE_ID_YOUTUBE", "Série 2 — configure", "series-02.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-02.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 3 — configure", "series-03.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-03.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 4 — configure", "series-04.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-04.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 5 — configure", "series-05.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-05.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 6 — configure", "series-06.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-06.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 7 — configure", "series-07.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-07.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 8 — configure", "series-08.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-08.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 9 — configure", "series-09.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-09.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 10 — configure", "series-10.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-10.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Série 11 — configure", "series-11.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/series-epicas/series-11.jpg"),
     ],
   },
   {
-    nome: "Documentários",  // ← NOME DA CATEGORIA
+    nome: "Documentários",
+    slug: "documentarios",
     videos: [
-      {
-        id: "dQw4w9WgXcQ",
-        title: "Exemplo Documentário",
-        thumbnail:
-          "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800",
-        description:
-          "Adicione aqui seus vídeos do YouTube e URLs das imagens de capa.",
-        match: 88,
-        year: "2024",
-        duration: "50min",
-        rating: "L",
-      },
+      video("dQw4w9WgXcQ", "Exemplo Documentário", "exemplo-documentario.jpg", "Adicione aqui seus vídeos do YouTube e URLs das imagens de capa.", { match: 88, duration: "50min" }),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 2 — configure", "documentario-02.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-02.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 3 — configure", "documentario-03.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-03.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 4 — configure", "documentario-04.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-04.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 5 — configure", "documentario-05.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-05.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 6 — configure", "documentario-06.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-06.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 7 — configure", "documentario-07.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-07.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 8 — configure", "documentario-08.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-08.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 9 — configure", "documentario-09.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-09.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 10 — configure", "documentario-10.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-10.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Documentário 11 — configure", "documentario-11.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/documentarios/documentario-11.jpg"),
     ],
   },
   {
-    nome: "Filmes",  // ← NOME DA CATEGORIA
+    nome: "Filmes",
+    slug: "filmes",
     videos: [
-      {
-        id: "Dp8-wKmx8wY",
-        title: "Filme em Destaque",
-        thumbnail:
-          "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800",
-        description: "Troque o id e thumbnail pelos seus vídeos e imagens.",
-        match: 90,
-        year: "2024",
-        duration: "1h 30min",
-        rating: "12",
-      },
+      video("Dp8-wKmx8wY", "Filme em Destaque", "filme-destaque.jpg", "Troque o id e thumbnail pelos seus vídeos e imagens.", { duration: "1h 30min", rating: "12" }),
+      video("COLOQUE_ID_YOUTUBE", "Filme 2 — configure", "filme-02.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-02.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 3 — configure", "filme-03.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-03.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 4 — configure", "filme-04.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-04.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 5 — configure", "filme-05.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-05.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 6 — configure", "filme-06.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-06.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 7 — configure", "filme-07.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-07.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 8 — configure", "filme-08.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-08.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 9 — configure", "filme-09.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-09.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 10 — configure", "filme-10.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-10.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Filme 11 — configure", "filme-11.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/filmes/filme-11.jpg"),
     ],
   },
   {
     nome: "Testemunhos",
+    slug: "testemunhos",
     videos: [
-      {
-        id: "kJQP7kiw5Fk",
-        title: "Testemunho de Fé",
-        thumbnail:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
-        description: "Histórias reais de transformação. Edite id e thumbnail.",
-        match: 85,
-        year: "2024",
-        duration: "15min",
-        rating: "L",
-      },
+      video("kJQP7kiw5Fk", "Testemunho de Fé", "testemunho-fe.jpg", "Histórias reais de transformação. Edite id e thumbnail.", { match: 85, duration: "15min" }),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 2 — configure", "testemunho-02.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-02.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 3 — configure", "testemunho-03.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-03.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 4 — configure", "testemunho-04.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-04.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 5 — configure", "testemunho-05.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-05.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 6 — configure", "testemunho-06.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-06.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 7 — configure", "testemunho-07.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-07.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 8 — configure", "testemunho-08.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-08.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 9 — configure", "testemunho-09.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-09.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 10 — configure", "testemunho-10.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-10.jpg"),
+      video("COLOQUE_ID_YOUTUBE", "Testemunho 11 — configure", "testemunho-11.jpg", "Configure: id do YouTube, título, descrição e coloque a capa em public/images/categorias/testemunhos/testemunho-11.jpg"),
     ],
   },
   {
-    nome: "Música e Louvor",  // ← NOME DA CATEGORIA
+    nome: "Música e Louvor",
+    slug: "musica-louvor",
     videos: [
-      {
-        id: "ScMzIvxBSi4",
-        title: "Louvor ao Vivo",
-        thumbnail:
-          "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800",
-        description:
-          "Adicione seus vídeos de música e louvor. Troque id e thumbnail.",
-        match: 87,
-        year: "2024",
-        duration: "5min",
-        rating: "L",
-      },
+      video("ScMzIvxBSi4", "Louvor ao Vivo", "louvor-ao-vivo.jpg", "Adicione seus vídeos de música e louvor. Troque id e thumbnail.", { match: 87, duration: "5min" }),
     ],
   },
 ];
@@ -238,12 +356,15 @@ const NetflixPlayer: React.FC<{ videoId: string; onClose: () => void }> = ({
   );
 };
 
+type CategorySlug = keyof typeof IMAGENS.categorias;
+
 const MovieRow: React.FC<{
   title: string;
+  slug: CategorySlug | ((movie: Movie) => CategorySlug);
   movies: Movie[];
   onPlay: (id: string) => void;
-  onInfo: (m: Movie) => void;
-}> = ({ title, movies, onPlay, onInfo }) => {
+  onInfo: (m: Movie, slug: CategorySlug) => void;
+}> = ({ title, slug, movies, onPlay, onInfo }) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const scroll = (dir: "left" | "right") => {
     if (rowRef.current) {
@@ -255,6 +376,7 @@ const MovieRow: React.FC<{
       });
     }
   };
+  const getSlug = (movie: Movie): CategorySlug => typeof slug === "function" ? slug(movie) : slug;
   return (
     <div className="mb-14 group/row relative px-4 md:px-12">
       <h2 className="text-white text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
@@ -271,44 +393,47 @@ const MovieRow: React.FC<{
           ref={rowRef}
           className="flex gap-4 overflow-x-auto no-scrollbar pb-10 scroll-smooth px-2"
         >
-          {movies.map((movie) => (
+          {movies.map((movie) => {
+            const movieSlug = getSlug(movie);
+            const thumbUrl = getThumbnailUrl(movieSlug, movie.thumbnail);
+            const fallback = getThumbnailFallback(movieSlug, movie.thumbnail);
+            return (
             <div
               key={movie.id}
-              onClick={() => onPlay(movie.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && onPlay(movie.id)}
-              className="flex-none w-[280px] md:w-[360px] aspect-video rounded-md overflow-hidden cursor-pointer hover:scale-110 md:hover:scale-125 hover:z-50 transition-all duration-500 delay-75 relative group/card shadow-2xl bg-[#2a2a2a]"
+              className="flex-none w-[280px] md:w-[360px] flex flex-col rounded-md overflow-hidden cursor-pointer hover:z-50 transition-all duration-300 group/card"
             >
-              <img
-                src={movie.thumbnail}
-                alt={movie.title}
-                className="w-full h-full object-cover pointer-events-none"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex flex-col justify-end p-4 md:p-5 pointer-events-none">
-                <div className="flex gap-2 mb-4 pointer-events-auto">
-                  <div
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center hover:bg-white/90 shadow-lg"
-                    aria-hidden
-                  >
-                    <Play size={18} fill="black" />
-                  </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onInfo(movie);
-                    }}
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/50 flex items-center justify-center ml-auto hover:border-white text-white"
-                  >
-                    <ChevronDown size={18} />
+              <div
+                onClick={() => onPlay(movie.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && onPlay(movie.id)}
+                className="relative aspect-video rounded-t-md overflow-hidden bg-[#2a2a2a] hover:scale-[1.02] transition-transform duration-300 shadow-2xl"
+              >
+                <img
+                  src={thumbUrl}
+                  alt={movie.title}
+                  className="w-full h-full object-cover pointer-events-none"
+                  onError={(e) => { if (fallback && e.currentTarget.src !== fallback) e.currentTarget.src = fallback; }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover/card:bg-white group-hover/card:scale-110 transition-all duration-300">
+                    <Play size={28} className="md:w-8 md:h-8 text-black ml-1" fill="black" />
                   </div>
                 </div>
-                <h3 className="text-white text-xs md:text-sm font-black truncate pointer-events-none">
-                  {movie.title}
-                </h3>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); onInfo(movie, movieSlug); }}
+                  className="absolute top-2 right-2 w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center hover:border-white hover:bg-white/10 text-white transition-colors z-10"
+                  aria-label="Mais informações"
+                >
+                  <ChevronDown size={18} />
+                </button>
               </div>
+              <h3 className="text-white text-sm md:text-base font-bold text-center py-3 px-2 bg-[#1a1a1a] rounded-b-md truncate">
+                {movie.title}
+              </h3>
             </div>
-          ))}
+          ); })}
         </div>
         <button
           onClick={() => scroll("right")}
@@ -323,11 +448,14 @@ const MovieRow: React.FC<{
 
 const InfoModal: React.FC<{
   movie: Movie;
+  categorySlug?: keyof typeof IMAGENS.categorias;
   isOpen: boolean;
   onClose: () => void;
   onPlay: (id: string) => void;
-}> = ({ movie, isOpen, onClose, onPlay }) => {
+}> = ({ movie, categorySlug, isOpen, onClose, onPlay }) => {
   if (!isOpen) return null;
+  const thumbUrl = categorySlug ? getThumbnailUrl(categorySlug, movie.thumbnail) : movie.thumbnail;
+  const thumbFallback = categorySlug ? getThumbnailFallback(categorySlug, movie.thumbnail) : undefined;
   return (
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-sm animate-profile">
       <div className="bg-[#181818] w-full max-w-4xl rounded-xl overflow-hidden shadow-2xl relative">
@@ -344,7 +472,12 @@ const InfoModal: React.FC<{
           onKeyDown={(e) => e.key === "Enter" && onPlay(movie.id)}
           className="relative aspect-video cursor-pointer"
         >
-          <img src={movie.thumbnail} className="w-full h-full object-cover pointer-events-none" alt="" />
+          <img
+            src={thumbUrl}
+            className="w-full h-full object-cover pointer-events-none"
+            alt=""
+            onError={(e) => { if (thumbFallback && e.currentTarget.src !== thumbFallback) e.currentTarget.src = thumbFallback; }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent pointer-events-none"></div>
           <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 pointer-events-none">
             <h1 className="text-2xl md:text-5xl font-black mb-4 md:mb-6 uppercase tracking-tighter text-white drop-shadow-lg">
@@ -380,9 +513,10 @@ const LoginScreen: React.FC<{
   <div className="min-h-screen w-full relative flex items-center justify-center overflow-hidden bg-black">
     <div className="absolute inset-0 z-0">
       <img
-        src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2000"
+        src={IMAGENS.login.background}
         className="w-full h-full object-cover opacity-50 blur-[2px]"
         alt="Background"
+        onError={(e) => { if (e.currentTarget.src !== IMAGENS.login.fallback) e.currentTarget.src = IMAGENS.login.fallback; }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
     </div>
@@ -425,6 +559,7 @@ export default function App() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [infoMovie, setInfoMovie] = useState<Movie | null>(null);
+  const [infoCategorySlug, setInfoCategorySlug] = useState<keyof typeof IMAGENS.categorias | undefined>(undefined);
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -461,13 +596,19 @@ export default function App() {
     });
 
   const todosOsFilmes = useMemo(() => CATEGORIAS.flatMap((c) => c.videos), []);
+  const heroCategorySlug = useMemo(() => {
+    const cat = CATEGORIAS.find((c) => c.videos.some((v) => v.id === HERO_CONFIG.videoId));
+    return cat?.slug;
+  }, []);
+
   const heroMovie = useMemo((): Movie => {
-    const found = todosOsFilmes.find((m) => m.id === HERO_CONFIG.videoId);
+    const cat = CATEGORIAS.find((c) => c.videos.some((v) => v.id === HERO_CONFIG.videoId));
+    const found = cat?.videos.find((m) => m.id === HERO_CONFIG.videoId);
     return (
       found ?? {
         id: HERO_CONFIG.videoId,
         title: HERO_CONFIG.title,
-        thumbnail: HERO_CONFIG.coverImage,
+        thumbnail: IMAGENS.hero.cover,
         description: HERO_CONFIG.description,
         match: 99,
         year: "",
@@ -501,8 +642,9 @@ export default function App() {
           {infoMovie && (
             <InfoModal
               movie={infoMovie}
+              categorySlug={infoCategorySlug}
               isOpen={!!infoMovie}
-              onClose={() => setInfoMovie(null)}
+              onClose={() => { setInfoMovie(null); setInfoCategorySlug(undefined); }}
               onPlay={setActiveVideoId}
             />
           )}
@@ -571,6 +713,7 @@ export default function App() {
                   src={HERO_CONFIG.coverImage}
                   className="w-full h-full object-cover opacity-50 animate-pulse-slow pointer-events-none"
                   alt="Hero"
+                  onError={(e) => { if (e.currentTarget.src !== HERO_CONFIG.coverImageFallback) e.currentTarget.src = HERO_CONFIG.coverImageFallback; }}
                 />
                 <div className="absolute inset-0 hero-gradient"></div>
               </div>
@@ -621,17 +764,19 @@ export default function App() {
                 <MovieRow
                   key={cat.nome}
                   title={cat.nome}
+                  slug={cat.slug}
                   movies={cat.videos}
                   onPlay={setActiveVideoId}
-                  onInfo={setInfoMovie}
+                  onInfo={(movie, slug) => { setInfoMovie(movie); setInfoCategorySlug(slug); }}
                 />
               ))
             ) : (
               <MovieRow
                 title="Resultados da busca"
+                slug={(movie) => getCategorySlugForMovie(movie.id)}
                 movies={filteredMovies}
                 onPlay={setActiveVideoId}
-                onInfo={setInfoMovie}
+                onInfo={(movie, slug) => { setInfoMovie(movie); setInfoCategorySlug(slug); }}
               />
             )}
           </div>
