@@ -166,7 +166,7 @@ const HERO_CONFIG = {
   videoId: "Dp8-wKmx8wY",
   coverImage: IMAGENS.hero.cover,
   coverImageFallback: IMAGENS.hero.fallback,
-  title: "O MILAGRE DA VIDA",
+  title: "A CRIAÇÃO",
   description:
     "Uma experiência cinematográfica sobre os milagres que nos cercam todos os dias. Assista agora ao conteúdo original.",
 };
